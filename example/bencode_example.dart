@@ -1,5 +1,5 @@
 import 'dart:typed_data';
-import 'package:bencode/bencode.dart';
+import 'package:torrent_bencode/torrent_bencode.dart';
 
 main() async {
   var decoded = bDecoder.convertString('d5:hello5:worlde');

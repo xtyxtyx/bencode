@@ -79,6 +79,13 @@ main() async {
 }
 ```
 
+## Tests
+
+Run tests:
+```
+pub run test
+```
+
 ## Features and bugs
 
 Please file feature requests and bugs at the [issue tracker][tracker].

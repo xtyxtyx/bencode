@@ -1,6 +1,6 @@
 import 'dart:io';
 
-import 'package:bencode/bencode.dart';
+import 'package:torrent_bencode/torrent_bencode.dart';
 
 main() async {
   final data = File('test/multi.torrent').readAsBytesSync();

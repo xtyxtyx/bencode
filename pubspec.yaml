@@ -1,4 +1,4 @@
-name: bencode
+name: torrent_bencode
 description: >
   This library provides classes to encode/decode bencoded bytes.
   Mainly used to implement bittorrent related functions.

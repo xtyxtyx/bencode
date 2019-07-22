@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'package:bencode/src/data_reader.dart';
+import 'package:torrent_bencode/src/data_reader.dart';
 import 'package:test/test.dart';
 
 void main() {

@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'dart:typed_data';
 
-import 'package:bencode/bencode.dart';
+import 'package:torrent_bencode/torrent_bencode.dart';
 import 'package:test/test.dart';
 
 void main() {
