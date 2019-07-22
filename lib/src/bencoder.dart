@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'dart:typed_data';
 
@@ -9,7 +8,7 @@ class BEncoder extends Converter<dynamic, List<int>> {
   BEncoder._();
 
   /// `convert` converts dart object to bencoded bytes
-  /// 
+  ///
   /// Note that Strings are encoded in utf8. To encode raw bytes,
   /// please use Uint8List. More details in README and bencode_example.dart.
   List<int> convert(dynamic object) {
@@ -33,24 +32,16 @@ class BEncoder extends Converter<dynamic, List<int>> {
   }
 
   List<int> _encodeUtf8String(String str) {
-    final builder = BytesBuilder();
     final data = utf8.encode(str);
     final length = ascii.encode(data.length.toString());
     const comma = 58; // ascii code of `:`
-    builder.add(length);
-    builder.addByte(comma);
-    builder.add(data);
-    return builder.toBytes();
+    return length + [comma] + data;
   }
 
   List<int> _encodeString(List<int> data) {
-    final builder = BytesBuilder();
     final length = ascii.encode(data.length.toString());
     const comma = 58; // ascii code of `:`
-    builder.add(length);
-    builder.addByte(comma);
-    builder.add(data);
-    return builder.toBytes();
+    return length + [comma] + data;
   }
 
   List<int> _encodeInteger(int i) {
@@ -58,27 +49,27 @@ class BEncoder extends Converter<dynamic, List<int>> {
   }
 
   List<int> _encodeList(List<dynamic> list) {
-    final builder = BytesBuilder();
+    final result = <int>[];
     const i = 108; // ascii code of `l`
     const e = 101; // ascii code of `e`
-    builder.addByte(i);
+    result.add(i);
     for (var item in list) {
-      builder.add(convert(item));
+      result.addAll(convert(item));
     }
-    builder.addByte(e);
-    return builder.toBytes();
+    result.add(e);
+    return result;
   }
 
   List<int> _encodeDictionary(Map<String, dynamic> dict) {
-    final builder = BytesBuilder();
+    final result = <int>[];
     const d = 100; // ascii code of `d`
     const e = 101; // ascii code of `e`
-    builder.addByte(d);
+    result.add(d);
     for (var item in dict.entries) {
-      builder.add(convert(item.key));
-      builder.add(convert(item.value));
+      result.addAll(convert(item.key));
+      result.addAll(convert(item.value));
     }
-    builder.addByte(e);
-    return builder.toBytes();
+    result.add(e);
+    return result;
   }
 }
